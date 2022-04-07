@@ -1,0 +1,100 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: rgb(12, 12, 12);
+}
+
+.nav {
+    display: left;
+    align-items: center;
+    justify-content: space-around;
+    height: 6vh;
+    background: rgb(221, 223, 226);
+  }
+  .nav-brand {
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .nav-menu { 
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3rem;
+  }
+  .nav-toggler {
+    display: none;
+    position: absolute;
+    left: 10px;
+  }
+  .nav-toggler div {
+    width: 2.5rem;
+    height: 0.2rem;
+    margin: 0.4rem;
+    background: rgb(25, 218, 137);
+    transition: 0.3s ease-in;
+  }
+  .header-container{
+    background: rgb(236, 238, 241);
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 2000px) {
+    .nav-toggler {
+      display: block;
+      cursor: pointer;
+    }
+    .nav-menu {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      height: 93vh;
+      width: 25vw;
+      background: rgb(54, 238, 131);
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: 0.3s ease-out;
+    }
+  }
+  /* Active Class */
+  .nav-active {
+    transform: translateX(0%);
+  }
+  
+  /* Toggle Icon Animation */
+  
+  .toggle .line1 {
+    transform: rotate(-45deg) translate(-4px, 5px);
+  }
+  .toggle .line2 {
+    opacity: 0;
+  }
+  .toggle .line3 {
+    transform: rotate(45deg) translate(-4px, -5px);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .header-icon{
+    align-items: right;
+  }
+  
