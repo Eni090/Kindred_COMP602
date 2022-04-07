@@ -2,7 +2,6 @@ import React from 'react';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 import HouseRoundedIcon from '@mui/icons-material/HouseRounded';
 import IconButton from '@mui/material/IconButton';
-import './Header.css';
 import Navbar from './components/navbar';
 
 function Header() {
