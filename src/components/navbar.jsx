@@ -1,6 +1,7 @@
 import React from "react";
 import "../components/navbar.css";
 import { useState } from "react";
+import { Outlet, Link } from "react-router-dom";
 
 function Navbar() {
   //Navbar
@@ -19,6 +20,7 @@ function Navbar() {
   const [toggleIcon, setToggleIcon] = useState("nav-toggler");
 
   return (
+    <>
     <nav className="nav">
       <div className="header-container">
         <div onClick={navToggle} className={toggleIcon}>
@@ -26,26 +28,27 @@ function Navbar() {
           <div className="line2"></div>
           <div className="line3"></div>
         </div>
-        
       </div>
       <ul className={active}>
         <li className="nav-item">
-          <a href="Home" className="nav-link">
+          <Link to ="/" className="nav-link">
             Home
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a href="About" className="nav-link">
-            About
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="Contact" className="nav-link">
+        <Link to ="/contact" className="nav-link">
             Contact
-          </a>
+          </Link>
+        </li>
+        <li className="nav-item">
+        <Link to ="/profile" className="nav-link">
+            Profile
+          </Link>
         </li>
       </ul>
     </nav>
+    <Outlet />
+    </>
   );
 }
 
