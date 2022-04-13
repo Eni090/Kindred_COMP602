@@ -5,6 +5,8 @@ import Contact from './components/Contact';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Nopage from './components/NoPage';
+import Chat from './components/Chat';
+import Buttons from './components/Buttons';
 
 function App() {
 	return (
@@ -13,11 +15,12 @@ function App() {
 			<Router>
 				<Header />
 				<Routes>
-					<Route path="/" element={<Home />}>
-						<Route path="/contact" element={<Contact />} />
-						<Route path="/profile" element={<Profile />} />
-						<Route path="*" element={<Nopage />} />
-					</Route>
+					<Route path="/" element={<><Home /><Buttons /></>} />
+					<Route path="/chat" element={<Chat />} />
+					<Route path="/contact" element={<Contact />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile" element={<Profile />} />
+					<Route path="*" element={<Nopage />} />
 				</Routes>
 			</Router>
 		</div>

@@ -1,8 +1,9 @@
 import React from 'react';
-import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HouseRoundedIcon from '@mui/icons-material/HouseRounded';
 import IconButton from '@mui/material/IconButton';
 import Navbar from './components/navbar';
+import { Link } from 'react-router-dom';
 
 function Header() {
 	return (
@@ -10,13 +11,15 @@ function Header() {
 			<Navbar />
 
 			{/* House Icon */}
-			<IconButton>
-				<HouseRoundedIcon fontSize="large" />
-			</IconButton>
+			<Link to="/">
+				<IconButton>
+					<HouseRoundedIcon fontSize="large" />
+				</IconButton>
+			</Link>
 
 			{/* Message Icon*/}
 			<IconButton>
-				<MessageRoundedIcon className="header-icon" fontSize="large" />
+				<AccountCircleIcon className="header-icon" fontSize="large" />
 			</IconButton>
 		</div>
 	);

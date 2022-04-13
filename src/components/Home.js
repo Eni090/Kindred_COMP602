@@ -7,13 +7,18 @@ function Home() {
 	const [ houses, setHouses ] = useState([]);
 
 	useEffect(() => {
-		database.collection('houses').onSnapshot((snapshot) => setHouses(snapshot.docs.map((doc) => doc.data())));
+		const unsubscribe = database
+			.collection('houses')
+			.onSnapshot((snapshot) => setHouses(snapshot.docs.map((doc) => doc.data())));
+
+		return () => {
+			// Cleanup process
+			unsubscribe();
+		};
 	}, []);
 
 	return (
 		<div>
-			<h1>Home</h1>
-
 			<div className="HouseCards_cardContainer">
 				{houses.map((house) => (
 					<TinderCard className="swipe" key={house.name} preventSwipe={[ 'up', 'down' ]}>
