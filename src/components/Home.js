@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import TinderCard from 'react-tinder-card';
-import database from './firebase';
+import { database } from './firebase';
+import { collection, query, onSnapshot } from 'firebase/firestore';
 import './HouseCards.css';
+import { useAuth } from '../context/UserAuthContext';
 
 function Home() {
 	const [ houses, setHouses ] = useState([]);
 
 	useEffect(() => {
-		const unsubscribe = database
-			.collection('houses')
-			.onSnapshot((snapshot) => setHouses(snapshot.docs.map((doc) => doc.data())));
+		const q = query(collection(database, 'houses'));
+		const unsub = onSnapshot(q, (snapshot) => setHouses(snapshot.docs.map((doc) => doc.data())));
 
 		return () => {
 			// Cleanup process
-			unsubscribe();
+			unsub();
 		};
 	}, []);
 
