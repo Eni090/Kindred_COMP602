@@ -15,7 +15,7 @@ const handlesubmit = async (e) =>{
     setError("");
     try{
         await signUp(email, password);
-        navigate("/login");
+        navigate("/");
     }catch(err){
         setError(err.message);
     }
@@ -51,7 +51,7 @@ const handlesubmit = async (e) =>{
       </Card.Body>
       </Card>
       <div className="w-100 box mt-2 text-center">
-        Already have an account? <Link to="/login">Log In</Link>
+        Already have an account? <Link to="/">Log In</Link>
       </div>
     </>
   )
