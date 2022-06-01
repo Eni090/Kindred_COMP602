@@ -1,60 +1,104 @@
-import React, {useState} from 'react'
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Alert, Card, Button } from "react-bootstrap";
-import { useAuth } from '../context/UserAuthContext';
+import React, { useState } from "react";
+import { Card } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, database } from "./firebase";
+import { setDoc, doc, Timestamp } from "firebase/firestore";
 
-const Signup =() => {
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [error, setError] = useState("");
-const {signUp} = useAuth();
-const navigate = useNavigate();
+const Signup = () => {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    error: null,
+    loading: false,
+  });
 
-const handlesubmit = async (e) =>{
+  const navigate = useNavigate();
+
+  const { name, email, password, error, loading } = data;
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    try{
-        await signUp(email, password);
-        navigate("/");
-    }catch(err){
-        setError(err.message);
+    setData({ ...data, error: null, loading: true });
+    if (!name || !email || !password) {
+      setData({ ...data, error: "All fields are required" });
     }
-}
-  return (
-    <>
-    <Card>
-        <Card.Body>
-        <h2 className="text-center mb-4">Kindred Signup</h2>
-        {error && <Alert variant='danger'>{error}</Alert>}
-        <Form onSubmit={handlesubmit}>
-          <Form.Group controlId="Email">
-              <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Email address"
-              onChange ={ (e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-          <Form.Group className="mb-4" controlId="Password">
-              <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              onChange ={ (e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-            <Button variant="primary w-100" type="Submit">
-              Sign up
-            </Button>
-        </Form>
-      </Card.Body>
-      </Card>
+      await setDoc(doc(database, "users", result.user.uid), {
+        uid: result.user.uid,
+        name,
+        email,
+        createdAt: Timestamp.fromDate(new Date()),
+        isOnline: true,
+      });
+      setData({
+        name: "",
+        email: "",
+        password: "",
+        error: null,
+        loading: false,
+      });
+      navigate("/");
+    } catch (err) {
+      setData({ ...data, error: err.message, loading: false });
+    }
+  };
+
+  return (
+    <section>
+      <h3>Create An Account</h3>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter Email"
+            value={name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="text"
+            name="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={handleChange}
+          />
+        </div>
+        {error ? <p className="error">{error}</p> : null}
+        <div className="btn_container">
+          <button className="btn">Join</button>
+        </div>
+      </form>
       <div className="w-100 box mt-2 text-center">
         Already have an account? <Link to="/">Log In</Link>
       </div>
-    </>
-  )
-}
+    </section>
+  );
+};
 
-export default Signup
+export default Signup;

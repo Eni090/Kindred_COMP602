@@ -1,11 +1,79 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Img from "../image.jpg";
+import Cam from "./svg/Cam";
 
-function Profile() {
-  return (
-    <div>
-      <h1>Profile</h1>
-    </div>
-  );
-}
+import { storage, database, auth } from "./firebase";
+import {
+  ref,
+  getDownloadURL,
+  uploadBytes,
+  deleteObject,
+} from "firebase/storage";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
+
+const Profile = () => {
+  const [img, setImg] = useState("");
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    getDoc(doc(database, "users", auth.currentUser.uid)).then((docSnap) => {
+      if (docSnap.exists) {
+        setUser(docSnap.data());
+      }
+    });
+    if (img) {
+      const uploadImg = async () => {
+        const imgRef = ref(
+          storage,
+          `profilePictures/${new Date().getTime()} - ${img.name}`
+        );
+        try {
+          const snap = uploadBytes(imgRef, img);
+          const url = await getDownloadURL(
+            ref(storage, (await snap).ref.fullPath)
+          );
+
+          await updateDoc(doc(database, "users", auth.currentUser.uid), {
+            profilePictures: url,
+            profilePicturesPath: (await snap).ref.fullPath,
+          });
+          setImg("");
+        } catch (err) {
+          console.log(err.message);
+        }
+      };
+      uploadImg();
+    }
+  }, [img]);
+  return user ? (
+    <section>
+      <div className="profile_container">
+        <div className="img_container">
+          <img src={user.profilePictures || Img} alt="profile" />
+          <div className="overlay">
+            <div>
+              <label htmlFor="photo">
+                <Cam />
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                id="photo"
+                onChange={(e) => setImg(e.target.files[0])}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="text_container">
+          <h3>{user.name}</h3>
+          <p>{user.email}</p>
+          <hr />
+          <small>Joined on: {user.createdAt.toDate().toDateString()}</small>
+        </div>
+      </div>
+    </section>
+  ) : null;
+};
 
 export default Profile;

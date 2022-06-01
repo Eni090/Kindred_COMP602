@@ -3,10 +3,12 @@ import firebase from "firebase/compat/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCiQVO7eHPBPN-76t-kpbBF933zmFEve5A",
   authDomain: "kindred-comp602.firebaseapp.com",
+  databaseURL: "http://kindred-comp602.firebaseio.com",
   projectId: "kindred-comp602",
   storageBucket: "kindred-comp602.appspot.com",
   messagingSenderId: "519699364094",
@@ -17,5 +19,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
 
 export default app;
