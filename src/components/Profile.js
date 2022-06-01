@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Img from "../image.jpg";
 import Cam from "./svg/Cam";
 
-import { storage, database, auth } from "./firebase";
+import { storage, database } from "./firebase";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {
   ref,
   getDownloadURL,
@@ -13,14 +14,25 @@ import { getDoc, doc, updateDoc } from "firebase/firestore";
 
 const Profile = () => {
   const [img, setImg] = useState("");
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("");
+  const auth = getAuth();
 
   useEffect(() => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log(user);
+    } else {
+     console.log("no user");
+    }
     getDoc(doc(database, "users", auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists) {
         setUser(docSnap.data());
       }
     });
+  });
     if (img) {
       const uploadImg = async () => {
         const imgRef = ref(
@@ -69,7 +81,6 @@ const Profile = () => {
           <h3>{user.name}</h3>
           <p>{user.email}</p>
           <hr />
-          <small>Joined on: {user.createdAt.toDate().toDateString()}</small>
         </div>
       </div>
     </section>
