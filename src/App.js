@@ -12,6 +12,8 @@ import Buttons from "./components/Buttons";
 import Signup from "./components/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthContextProvider } from "./context/UserAuthContext";
+import ProfileEdit from "./components/ProfileEdit"
+import UploadHouses from "./components/UploadHouses";
 
 function App() {
   return (
@@ -57,6 +59,7 @@ function App() {
                       <Signup />
                     </div>
                   </Container>
+                  
                 }
               />
               <Route
@@ -69,8 +72,11 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/profileEdit" element={<ProfileEdit />} />
 
               <Route path="/profile" element={<Profile />} />
+              <Route path="/upload" element={<UploadHouses />} />
+
               <Route path="*" element={<Nopage />} />
             </Routes>
           </AuthContextProvider>

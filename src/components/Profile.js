@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Img from "../image.jpg";
 import Cam from "./svg/Cam";
-
+import {Link} from "react-router-dom";
 import { storage, database } from "./firebase";
-import {getAuth, onAuthStateChanged} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   ref,
   getDownloadURL,
@@ -18,21 +18,20 @@ const Profile = () => {
   const auth = getAuth();
 
   useEffect(() => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log(user);
-    } else {
-     console.log("no user");
-    }
-    getDoc(doc(database, "users", auth.currentUser.uid)).then((docSnap) => {
-      if (docSnap.exists) {
-        setUser(docSnap.data());
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        const uid = user.uid;
+        console.log(user);
+      } else {
+        console.log("no user");
       }
+      getDoc(doc(database, "users", auth.currentUser.uid)).then((docSnap) => {
+        if (docSnap.exists) {
+          setUser(docSnap.data());
+        }
+      });
     });
-  });
     if (img) {
       const uploadImg = async () => {
         const imgRef = ref(
@@ -79,9 +78,18 @@ const Profile = () => {
         </div>
         <div className="text_container">
           <h3>{user.name}</h3>
+          <p>{user.address}</p>
+          <p>{user.phone}</p>
           <p>{user.email}</p>
+          <p>{user.dob}</p>
+
           <hr />
         </div>
+          <Link to="/profileEdit">
+            <button>
+              <p>Edit Profile</p>
+            </button>
+          </Link>
       </div>
     </section>
   ) : null;
