@@ -19,14 +19,10 @@ function App() {
   return (
     <Container>
       <div className="App">
-        {/* Header Component*/}
         <Router>
           <AuthContextProvider>
             <Routes>
-              <Route
-                path="/home"
-                element={
-                  <ProtectedRoute>
+              <Route path="/home" element={<ProtectedRoute>
                     <>
                       <Home />
                       <Header />
@@ -73,10 +69,8 @@ function App() {
                 }
               />
               <Route path="/profileEdit" element={<ProfileEdit />} />
-
               <Route path="/profile" element={<Profile />} />
               <Route path="/upload" element={<UploadHouses />} />
-
               <Route path="*" element={<Nopage />} />
             </Routes>
           </AuthContextProvider>

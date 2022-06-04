@@ -1,28 +1,47 @@
 import React, { useState, useEffect } from "react";
 import Img from "../image.jpg";
 import Cam from "./svg/Cam";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { storage, database } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {
-  ref,
-  getDownloadURL,
-  uploadBytes,
-  deleteObject,
-} from "firebase/storage";
+import { ref, getDownloadURL, uploadBytes, deleteObject, listAll } from "firebase/storage";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
+
+function ImageEle(props) {
+  return <img src={props.value}/>
+}
 
 const Profile = () => {
   const [img, setImg] = useState("");
   const [user, setUser] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [imageUrls, setImageUrls] = useState([]);
   const auth = getAuth();
+  var authFlag = true;
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user) {        
         // User is signed in, see docs for a list of available properties
         const uid = user.uid;
-        console.log(user);
+        // console.log(user);
+        // Once user is signed in, grab user's uploaded images
+        if (authFlag) {
+          authFlag = false;
+          const userImages = ref(storage, `uploadHouses/` + auth.currentUser.uid);
+          listAll(userImages)
+            .then((res) => {
+              res.items.forEach((itemRef) => {
+                // All the items under listRef.
+                getDownloadURL(itemRef).then((imgUrl) => {
+                  setImageUrls((prev) => [...prev, imgUrl])
+                });
+              })
+            })
+            .catch((error) => {
+              // Uh-oh, an error occurred!
+            });             
+        }
       } else {
         console.log("no user");
       }
@@ -31,7 +50,8 @@ const Profile = () => {
           setUser(docSnap.data());
         }
       });
-    });
+    }); 
+
     if (img) {
       const uploadImg = async () => {
         const imgRef = ref(
@@ -85,11 +105,17 @@ const Profile = () => {
 
           <hr />
         </div>
-          <Link to="/profileEdit">
-            <button>
-              <p>Edit Profile</p>
-            </button>
-          </Link>
+        <Link to="/profileEdit">
+          <button>
+            <p>Edit Profile</p>
+          </button>
+        </Link>
+        <div className="image_container">
+         {imageUrls.map((url, index) => {
+           return <img src={url} key={index}/>;
+         })}
+          
+        </div>
       </div>
     </section>
   ) : null;
