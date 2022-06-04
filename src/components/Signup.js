@@ -4,6 +4,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, database } from "./firebase";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
+import { Grid, Paper, Avatar, TextField, Button } from "@mui/material";
+import AppRegistrationRoundedIcon from '@mui/icons-material/AppRegistrationRounded';
+import "./style.css";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -54,50 +57,65 @@ const Signup = () => {
       setData({ ...data, error: err.message, loading: false });
     }
   };
-
+  const paperStyle = { padding: 20, height: "60vh", margin: "20px auto" };
+  const avatarStyle = { backgroundColor: "blue" };
+  const accountStyle = { margin: 10, width: 340, align: "center" };
+  const signUpStyle = { marginBottom: 35, height: 50};
   return (
-    <section>
-      <h3>Create An Account</h3>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter Email"
-            value={name}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            name="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={handleChange}
-          />
-        </div>
-        {error ? <p className="error">{error}</p> : null}
-        <div className="btn_container">
-          <button className="btn">Join</button>
-        </div>
-      </form>
-      <div className="w-100 box mt-2 text-center">
-        Already have an account? <Link to="/">Log In</Link>
-      </div>
-    </section>
+    <form onSubmit={handleSubmit}>
+      <Grid>
+        <Paper elevation={10} style={paperStyle}>
+          <Grid align="center">
+            <h2 className = "register-title">Register</h2>
+          </Grid>
+          <div className="register-details">
+            <TextField 
+              type="text"
+              name = "name"
+              value={name}
+              onChange={handleChange}
+              placeholder="Enter name"
+              label="Full Name"
+              style={accountStyle}
+              fullWidth/>
+              
+            <TextField
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              placeholder="Enter Email"
+              label="Email"
+              style={accountStyle}
+              fullWidth
+            />
+            <TextField
+              type="password"
+              name="password"
+              value={password}
+              label="Password"
+              onChange={handleChange}
+              placeholder="Enter Password"
+              style={accountStyle}
+            />
+          </div>
+          {error ? <p className="error">{error}</p> : null}
+          <Button
+            disabled={loading}
+            type="submit"
+            color="primary"
+            variant="contained"
+            style={signUpStyle}
+            fullWidth
+          >
+            SignUp
+          </Button>
+          <div className="already-account">
+           <h5>Already have an account? <Link to="/">Log In</Link></h5> 
+          </div>
+        </Paper>
+      </Grid>
+    </form>
   );
 };
 

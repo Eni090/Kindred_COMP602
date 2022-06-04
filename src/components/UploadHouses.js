@@ -59,7 +59,7 @@ const UploadHouses = () => {
   }, [img]);
   return user ? (
     <section>
-      <div className="profile_container">
+      <div className="upload_houses_container">
         <div className="img_container">
           <img src={user.housePicture || Img} alt="house" />
           <div className="overlay">

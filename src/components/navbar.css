@@ -44,7 +44,7 @@ a {
   width: 2.5rem;
   height: 0.2rem;
   margin: 0.4rem;
-  background: rgb(25, 218, 137);
+  background: rgb(49, 10, 224);
   transition: 0.3s ease-in;
 }
 .header-container {
@@ -67,7 +67,7 @@ a {
     left: 0;
     height: 93vh;
     width: 25vw;
-    background: rgb(54, 238, 131);
+    background: rgb(15, 182, 98);
     flex-direction: column;
     transform: translateX(-100%);
     transition: 0.3s ease-out;
@@ -97,10 +97,7 @@ a {
 .header-icon {
   align-items: right;
 }
-.profile_container {
-  display: flex;
-  align-items: center;
-}
+
 .img_container {
   position: relative;
   margin-right: 20px;

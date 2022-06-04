@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "Montserrat", sans-serif;
+    src: url(../assets/Montserrat-VariableFont_wght.ttf);
+}
+
+* {
+  font-family: "Montserrat";  
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+p{
+    font-size: 18px;
+
+}
+
+.account-container {
+  margin: 0px;
+}
+.register-button {
+  margin: 50px;
+}
+
+.register-details {
+  margin-top: 30px;
+  margin-left: 8px;
+  margin-bottom: 20px;
+}
+.register-title {
+  margin-top: 40px;
+}
+.already-account {
+  text-align: center;
+  margin-top: 10px;
+}
+.profile_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_images_container {
+    display:flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.user_image{
+  flex: 1 0 33.33%;
+  height: 0;
+  padding-bottom: 33.33%;
+  background-size: cover;
+  background-position: center;
+}

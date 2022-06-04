@@ -4,7 +4,7 @@ import { database } from "./firebase";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import "./HouseCards.css";
 import { useAuth } from "../context/UserAuthContext";
-
+import "./style.css"
 function Home() {
   const [houses, setHouses] = useState([]);
 

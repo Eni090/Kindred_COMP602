@@ -6,10 +6,8 @@ import { storage, database } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref, getDownloadURL, uploadBytes, deleteObject, listAll } from "firebase/storage";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
+import "./style.css"
 
-function ImageEle(props) {
-  return <img src={props.value}/>
-}
 
 const Profile = () => {
   const [img, setImg] = useState("");
@@ -98,6 +96,7 @@ const Profile = () => {
         </div>
         <div className="text_container">
           <h3>{user.name}</h3>
+
           <p>{user.address}</p>
           <p>{user.phone}</p>
           <p>{user.email}</p>
@@ -110,11 +109,10 @@ const Profile = () => {
             <p>Edit Profile</p>
           </button>
         </Link>
-        <div className="image_container">
+        <div className="user_images_container">
          {imageUrls.map((url, index) => {
-           return <img src={url} key={index}/>;
+           return <div className = "user_image" style={{backgroundImage: `url(${url})`}} key={index}></div>;
          })}
-          
         </div>
       </div>
     </section>

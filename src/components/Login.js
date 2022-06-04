@@ -5,6 +5,9 @@ import GoogleButton from "react-google-button";
 import { updateDoc, doc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/UserAuthContext";
+import { Grid, Paper, Avatar, TextField, Button } from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import "./style.css";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -57,46 +60,72 @@ const Login = () => {
       setData({ ...data, error: err.message, loading: false });
     }
   };
+
+  const paperStyle = { padding: 20, height: "60vh", margin: "20px auto" };
+  const avatarStyle = { backgroundColor: "blue" };
+  const accountStyle = { margin: 10, width: 340, align: "center" };
+  const signInStyle = { marginBottom: 35, marginTop: 10 };
+
   return (
-    <section>
-      <h3>Log into your Account</h3>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="input_container">
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input_container">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </div>
-        {error ? <p className="error">{error}</p> : null}
-        <div className="btn_container">
-          <button className="btn" disabled={loading}>
+    <form onSubmit={handleSubmit}>
+      <Grid>
+        <Paper elevation={10} style={paperStyle}>
+          <Grid align="center">
+            <Avatar style={avatarStyle}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <h2>Welcome to Kindred</h2>
+          </Grid>
+          <div className = "account-container">
+            <TextField
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              placeholder="Enter Username"
+              label="Username"
+              style={accountStyle}
+              fullWidth
+              />
+            <TextField
+              type="password"
+              name="password"
+              value={password}
+              label="Password"
+              onChange={handleChange}
+              placeholder="Enter Password"
+              style={accountStyle}
+            />
+          </div>
+          {error ? <p className="error">{error}</p> : null}
+          <Button
+            disabled={loading}
+            type="submit"
+            color="primary"
+            variant="contained"
+            style={signInStyle}
+            fullWidth
+          >
             Login
-          </button>
-        </div>
-      </form>
-      <div>
-        <GoogleButton
-          className="g-btn w-100"
-          type="dark"
-          onClick={handleGoogleSignIn}
-        />
-      </div>
-      <div className="w-100 box mt-2 text-center">
-        Don't have an account? <Link to="/signup">Sign up</Link>
-      </div>
-    </section>
+          </Button>
+          <div>
+            <GoogleButton
+              className="g-btn w-100"
+              type="dark"
+              onClick={handleGoogleSignIn}
+            />
+          </div>
+          <div className = "register-button">
+            <h2 align="center">Don't Have Account Yet?</h2>
+            <Link to="/signup">
+              <Button variant="contained" fullWidth>
+                Register
+              </Button>
+            </Link>
+          </div>
+        </Paper>
+      </Grid>
+    </form>
   );
 };
 
