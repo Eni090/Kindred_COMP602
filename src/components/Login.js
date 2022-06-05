@@ -61,20 +61,13 @@ const Login = () => {
     }
   };
 
-  const paperStyle = { padding: 20, height: "60vh", margin: "20px auto" };
-  const avatarStyle = { backgroundColor: "blue" };
-  const accountStyle = { margin: 10, width: 340, align: "center" };
-  const signInStyle = { marginBottom: 35, marginTop: 10 };
 
   return (
     <form onSubmit={handleSubmit}>
       <Grid>
-        <Paper elevation={10} style={paperStyle}>
+    
           <Grid align="center">
-            <Avatar style={avatarStyle}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <h2>Welcome to Kindred</h2>
+            <h1 className="login-logo app-logo">Kindred</h1>
           </Grid>
           <div className = "account-container">
             <TextField
@@ -83,8 +76,8 @@ const Login = () => {
               value={email}
               onChange={handleChange}
               placeholder="Enter Username"
+              className="login-field"
               label="Username"
-              style={accountStyle}
               fullWidth
               />
             <TextField
@@ -94,7 +87,8 @@ const Login = () => {
               label="Password"
               onChange={handleChange}
               placeholder="Enter Password"
-              style={accountStyle}
+              className="login-field"
+              fullWidth
             />
           </div>
           {error ? <p className="error">{error}</p> : null}
@@ -103,7 +97,7 @@ const Login = () => {
             type="submit"
             color="primary"
             variant="contained"
-            style={signInStyle}
+            className="login-button"
             fullWidth
           >
             Login
@@ -115,15 +109,14 @@ const Login = () => {
               onClick={handleGoogleSignIn}
             />
           </div>
-          <div className = "register-button">
+          <div className="register-button-container">
             <h2 align="center">Don't Have Account Yet?</h2>
             <Link to="/signup">
-              <Button variant="contained" fullWidth>
+              <Button variant="contained" className="register-button" fullWidth>
                 Register
               </Button>
             </Link>
           </div>
-        </Paper>
       </Grid>
     </form>
   );

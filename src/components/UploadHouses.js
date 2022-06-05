@@ -11,6 +11,8 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { getDoc, doc, updateDoc, addDoc } from "firebase/firestore";
+import Header from "../Header";
+import HouseRoundedIcon from "@mui/icons-material/HouseRounded";
 
 const UploadHouses = () => {
   const [img, setImg] = useState("");
@@ -42,12 +44,13 @@ const UploadHouses = () => {
         try {
           const snap = uploadBytes(imgRef, img);
           const url = await getDownloadURL(
-            ref(storage, (await snap).ref.fullPath)
+          ref(storage, (await snap).ref.fullPath)
           );
-
           await updateDoc(doc(database, "users", auth.currentUser.uid), {
             housePicture: url,
             housePicturePath: (await snap).ref.fullPath,
+          }).then(()=> {
+            window.location.href = "/profile";
           });
           setImg("");
         } catch (err) {
@@ -59,28 +62,20 @@ const UploadHouses = () => {
   }, [img]);
   return user ? (
     <section>
+      <Header/>
       <div className="upload_houses_container">
         <div className="img_container">
-          <img src={user.housePicture || Img} alt="house" />
+          <HouseRoundedIcon fontSize="large"  /> +
           <div className="overlay">
             <div>
               <label htmlFor="photo">
                 <Cam />
               </label>
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                id="photo"
-                onChange={(e) => setImg(e.target.files[0])}
-              />
+              <input type="file" accept="image/*" style={{ display: "none" }} id="photo" onChange={(e) => setImg(e.target.files[0])}/>
             </div>
           </div>
         </div>
-        <div className="text_container">
-          <h3>{user.name}</h3>
-          <hr />
-        </div>
+        <h3 className="upload_house_text">Click Here To Upload</h3>
       </div>
     </section>
   ) : null;

@@ -24,8 +24,8 @@ function App() {
             <Routes>
               <Route path="/home" element={<ProtectedRoute>
                     <>
-                      <Home />
                       <Header />
+                      <Home />
                       <Buttons />
                     </>
                   </ProtectedRoute>

@@ -16,18 +16,13 @@ function Navbar() {
   
   //Navbar
   const [active, setActive] = useState("nav-menu");
-  const navToggle = () => {
-    active === "nav-menu"
-    ? setActive("nav-menu nav-active")
-    : setActive("nav-menu");
-    
-    //togglerIcon
-    
-    toggleIcon === "nav-toggler"
-    ? setToggleIcon("nav-toggler toggle")
-    : setToggleIcon("nav-toggler");
-  };
   const [toggleIcon, setToggleIcon] = useState("nav-toggler");
+
+  const navToggle = () => {
+    active === "nav-menu" ? setActive("nav-menu nav-active") : setActive("nav-menu");
+    //togglerIcon
+    toggleIcon === "nav-toggler" ? setToggleIcon("nav-toggler toggle") : setToggleIcon("nav-toggler");
+  };
   
   return (
     <>
@@ -39,30 +34,18 @@ function Navbar() {
             <div className="line3"></div>
           </div>
         </div>
-        <ul className={active}>
-          <li className="nav-item">
-            <Link to="/" className="nav-link">
-              <h2>
-                Home
-              </h2>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/profile" className="nav-link">
-              <h2>
-                Profile
-              </h2>
-            </Link>
-          </li>
-          <li className="nav-item" onClick={handleSignout}>
-            <Link to="/" className="nav-link">
-              <h2>
-               Logout
-              </h2>
-            </Link>
-          </li>
-        </ul>
       </nav>
+      <ul className={active}>
+        <li className="nav-item">
+          <Link to="/" className="nav-link">Home</Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/profile" className="nav-link">Profile</Link>
+        </li>
+        <li className="nav-item" onClick={handleSignout}>
+          <Link to="/" className="nav-link">Logout</Link>
+        </li>
+      </ul>
       <Outlet />
     </>
   );

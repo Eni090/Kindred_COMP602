@@ -6,7 +6,10 @@ import { storage, database } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ref, getDownloadURL, uploadBytes, deleteObject, listAll } from "firebase/storage";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
+import HouseRoundedIcon from "@mui/icons-material/HouseRounded";
 import "./style.css"
+import Header from "../Header";
+import { Button } from "@mui/material";
 
 
 const Profile = () => {
@@ -19,7 +22,7 @@ const Profile = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {        
+      if (user) {
         // User is signed in, see docs for a list of available properties
         const uid = user.uid;
         // console.log(user);
@@ -38,7 +41,7 @@ const Profile = () => {
             })
             .catch((error) => {
               // Uh-oh, an error occurred!
-            });             
+            });
         }
       } else {
         console.log("no user");
@@ -48,7 +51,7 @@ const Profile = () => {
           setUser(docSnap.data());
         }
       });
-    }); 
+    });
 
     if (img) {
       const uploadImg = async () => {
@@ -74,13 +77,15 @@ const Profile = () => {
       uploadImg();
     }
   }, [img]);
+
   return user ? (
     <section>
+      <Header />
       <div className="profile_container">
-        <div className="img_container">
-          <img src={user.profilePictures || Img} alt="profile" />
-          <div className="overlay">
-            <div>
+        <div className="profile_details_container">
+          <div className="profile_img_container">
+            <img src={user.profilePictures || Img} alt="profile" />
+            <div className="profile_img_overlay">
               <label htmlFor="photo">
                 <Cam />
               </label>
@@ -93,26 +98,27 @@ const Profile = () => {
               />
             </div>
           </div>
+          <div className="profile_text_container">
+            <h3>{user.name}</h3>
+            <p>{user.address}</p>
+            <p>{user.phone}</p>
+            <p>{user.email}</p>
+            <p>{user.dob}</p>
+          </div>
         </div>
-        <div className="text_container">
-          <h3>{user.name}</h3>
-
-          <p>{user.address}</p>
-          <p>{user.phone}</p>
-          <p>{user.email}</p>
-          <p>{user.dob}</p>
-
-          <hr />
+        <div className="profile_btn_container">
+          <Link to="/profileEdit" className="edit_profile_link">
+            <Button variant="contained" fullWidth className="edit_profile_btn" size="small">Edit Profile</Button>
+          </Link>
+          <Link to="/upload" className="upload_img_link">
+            <Button variant="contained" fullWidth className="upload_img_btn" size="small"><HouseRoundedIcon fontSize="large"  /> +</Button>
+          </Link>
         </div>
-        <Link to="/profileEdit">
-          <button>
-            <p>Edit Profile</p>
-          </button>
-        </Link>
+        <div className="divider"></div>
         <div className="user_images_container">
-         {imageUrls.map((url, index) => {
-           return <div className = "user_image" style={{backgroundImage: `url(${url})`}} key={index}></div>;
-         })}
+          {imageUrls.map((url, index) => {
+            return <div className="user_image" style={{ backgroundImage: `url(${url})` }} key={index}></div>;
+          })}
         </div>
       </div>
     </section>
