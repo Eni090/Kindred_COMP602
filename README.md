@@ -1,10 +1,51 @@
-# Getting Started with Create React App
+# Name
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Kindred Application
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+Our application is for roomate seekers, it is a medium to connect people who are looking to rent houses with other people.\
+So far our application has the following features:
+
+### Signup page
+
+This is the page for new users to create their account, so they can gain access into the application.
+
+![signup page example](Images/signup.jpg)
+
+### Login page
+
+This is the page used to gain access into the application, only users who have previously creted an account can log in.
+
+![Login page example](Images/login.PNG)
+
+### Homepage
+
+This is the first page the user who logs in sees, this is the page that leads to other parts of the application and displays the houses available for rent.
+
+![Homepage example](Images/homepage.PNG)
+
+### Navigation Bar
+
+This is located on the hompegae and the profile page. The navigation bar has 3 options available - Home, Profile, and logout.
+
+![Navigation Bar example](Images/nav.PNG)
+
+### Profile Page
+
+This is the page where the user details are stored in, the users are able to edit their profiles using the 'EDIT PROFILE' button.
+
+![Profile Page example](Images/profile.PNG)
+
+### Message Page
+
+This page is where the messaging magic happens. On this page you can see whos is online and who is not, you can also send texts and pictures.
+
+![Message Page example](Images/message.PNG)
+
+## Installation
+
+Pull the code from GitHub and use one of the following scripts options to run the application (if you are using React.js)
 
 ### `npm start`
 
@@ -39,32 +80,18 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Feel free to create a pull request if you would like to contibute. For major changes, please leave comments in your code and create an issue to discuss about your implementation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Authors and Acknowledgement
 
-### Code Splitting
+### Authors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Renjo Angeles
+- Eniola Omisakin
 
-### Analyzing the Bundle Size
+### Acknowledgement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Farhan Farooq (https://www.youtube.com/channel/UCxBXSL74oOJ_0yqC4bHc18Q)
+- Clever Programmer https://www.youtube.com/c/CleverProgrammer

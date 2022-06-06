@@ -13,17 +13,21 @@ function Navbar() {
     });
     await signOut(auth);
   };
-  
+
   //Navbar
   const [active, setActive] = useState("nav-menu");
   const [toggleIcon, setToggleIcon] = useState("nav-toggler");
 
   const navToggle = () => {
-    active === "nav-menu" ? setActive("nav-menu nav-active") : setActive("nav-menu");
+    active === "nav-menu"
+      ? setActive("nav-menu nav-active")
+      : setActive("nav-menu");
     //togglerIcon
-    toggleIcon === "nav-toggler" ? setToggleIcon("nav-toggler toggle") : setToggleIcon("nav-toggler");
+    toggleIcon === "nav-toggler"
+      ? setToggleIcon("nav-toggler toggle")
+      : setToggleIcon("nav-toggler");
   };
-  
+
   return (
     <>
       <nav className="nav">
@@ -37,13 +41,19 @@ function Navbar() {
       </nav>
       <ul className={active}>
         <li className="nav-item">
-          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/home" className="nav-link">
+            Home
+          </Link>
         </li>
         <li className="nav-item">
-          <Link to="/profile" className="nav-link">Profile</Link>
+          <Link to="/profile" className="nav-link">
+            Profile
+          </Link>
         </li>
         <li className="nav-item" onClick={handleSignout}>
-          <Link to="/" className="nav-link">Logout</Link>
+          <Link to="/" className="nav-link">
+            Logout
+          </Link>
         </li>
       </ul>
       <Outlet />
