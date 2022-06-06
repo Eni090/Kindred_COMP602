@@ -15,13 +15,13 @@ This is the page for new users to create their account, so they can gain access 
 
 ### Login page
 
-This is the page used to gain access into the application, only users who have previously creted an account can log in.
+This is the page used to gain access into the application, only users who have previously created an account can log in.
 
 ![Login page example](Images/login.PNG)
 
 ### Homepage
 
-This is the first page the user who logs in sees, this is the page that leads to other parts of the application and displays the houses available for rent.
+This is the first page the user who logs in sees, this is the page that leads to other pages of the application and displays the houses available for rent.
 
 ![Homepage example](Images/homepage.PNG)
 
@@ -33,13 +33,13 @@ This is located on the hompegae and the profile page. The navigation bar has 3 o
 
 ### Profile Page
 
-This is the page where the user details are stored in, the users are able to edit their profiles using the 'EDIT PROFILE' button.
+This is the page where the user details are stored, the users are able to edit their profiles using the 'EDIT PROFILE' button.
 
 ![Profile Page example](Images/profile.PNG)
 
 ### Message Page
 
-This page is where the messaging magic happens. On this page you can see whos is online and who is not, you can also send texts and pictures.
+This page is where the messaging magic happens. On this page you can see who is online and who is not, you can also send texts and pictures.
 
 ![Message Page example](Images/message.PNG)
 
